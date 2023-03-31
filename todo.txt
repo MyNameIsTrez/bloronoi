@@ -1,1 +1,0 @@
-// TODO: An optimization is to skip drawing cells of the same color. Keep in mind that the grids still need to be updated, however!

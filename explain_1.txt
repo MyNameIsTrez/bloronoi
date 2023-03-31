@@ -12,7 +12,7 @@ Per ray
    If 9 is found, pick 9 - 1 (- since 9 is odd: if the first seed was 8, 8 + 1 would be used). Let's say the new seed is 63.
 3. Floodfill level highest_level_having_seed_cell (so level 0) starting from cell grids[highest_level_having_seed_cell][seed_valued_cell_index] (so cell grids[0][0]).
    TODO: What four corners exactly? The direct children? For every child? On the pixel grid level?
-   TODO: When a P is encountered, use a while-loop to find the highest parent marked non-P, and recursively update its four children. 
+   TODO: When a P is encountered, use a while-loop to find the highest parent marked non-P, and recursively update its four children.
          Note that it's probably desirable for the floodfill to know whether the P cell was updated or not, to stop floodfilling that direction.
    TODO: What should be done when a C is encountered?
    The reason floodfilling is necessary and we can't just look at the four corners starting from the root every time,
