@@ -1,0 +1,20 @@
+/*
+0. level_index is 0. level_side_length is 1. added_seed_index was passed and is 63.
+1.
+  1a. added_seed_index_x = added_seed_index % SIDE_LENGTH
+  1b. added_seed_index_y = added_seed_index / SIDE_LENGTH
+  1c. pixels_per_cell_index = SIDE_LENGTH / level_side_length
+  1d. added_seed_cell_index_x = added_seed_index_x / pixels_per_cell_index
+  1e. added_seed_cell_index_y = added_seed_index_y / pixels_per_cell_index
+  1f. added_seed_cell_index = added_seed_cell_index_x + added_seed_cell_index_y * level_side_length
+2.
+  2a. if (grids[level_index][added_seed_cell_index] != P) // TODO: What to do when C is encountered?
+    2a1. original_seed_index = grids[level_index][added_seed_cell_index]
+    2a2. grids[level_index][added_seed_cell_index] = C
+    2a3. Recurse with original_seed_index, level_index + 1 and level_side_length * 2.
+      2a3a. Assign every child cell of the parent the value original_seed_index.
+      2a3b. Put every cell around the added seed on this level on a stack.
+            Mark the cell value with the seed's index if the distance to any other seed is X larger?
+            Mark the cell value as C and recurse if the distance to any other seed is roughly equal?
+      2a3c. Go to step 1a.
+*/

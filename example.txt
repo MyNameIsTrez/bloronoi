@@ -1,0 +1,59 @@
+/*
+Example:
+
+In this grid, a cell that contains two red (R) seeds and two green (G) seeds
+gets completely absorbed by a new, blue (B) seed. Those red and green pixels are set to LOOK_AT_PARENT,
+and their parent to the blue seed's index (That parent cell may however be set to LOOK_AT_PARENT as well).
+The level indices are displayed at the top.
+P stands for LOOK_AT_PARENT and C for LOOK_AT_CHILDREN.
+
+0 1
+C RG
+  RG
+->
+B PP
+  PP
+
+Larger example where the grid starts out empty:
+0 1  2    3
+P PP PPPP PPPPPPPP
+  PP PPPP PPPPPPPP
+     PPPP PPPPPPPP
+     PPPP PPPPPPPP
+          PPPPPPPP
+          PPPPPPPP
+          PPPPPPPP
+          PPPPPPPP
+
+Has a seed placed at index 9:
+0 1  2    3
+9 PP PPPP PPPPPPPP
+  PP PPPP PPPPPPPP
+     PPPP PPPPPPPP
+     PPPP PPPPPPPP
+          PPPPPPPP
+          PPPPPPPP
+          PPPPPPPP
+          PPPPPPPP
+
+And then has a seed placed at index 63 (denoted with a - instead of 63):
+0 1  2    3
+C 9C PP99 PPPPPPPP
+  CC PP9C PPPPPPPP
+     99C- PPPPPP9-
+     9C-- PPPPPP--
+          PPPP9-PP
+          PPPP--PP
+          PP9-PPPP
+          PP--PPPP
+
+These levels can then be uncompressed to get this voronoi diagram:
+99999999
+99999999
+9999999-
+999999--
+99999---
+9999----
+999-----
+99------
+*/

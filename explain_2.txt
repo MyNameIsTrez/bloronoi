@@ -1,0 +1,12 @@
+/*
+Explanation:
+
+Updating every pixel cell when their seed gets updated is extremely slow.
+The trick is that when a 2x2 group of cells all have the same parent, you can just inspect and update their parent.
+Any cell either stores its pixel seed index, LOOK_AT_PARENT, or LOOK_AT_CHILDREN.
+Initialize each grid cell to LOOK_AT_PARENT.
+Initialize grids[0][0] with the first seed_index.
+"if (grid[0][0] == LOOK_AT_PARENT) grid[0][0] = seed_index;" is probably needed to let the first seed be placed.
+Grid cells should only have their seed updated if the distance to the new seed is shorter.
+Don't draw squares if their cell's old seed has the same color as the new seed.
+*/

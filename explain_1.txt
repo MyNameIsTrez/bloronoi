@@ -1,0 +1,24 @@
+/*
+Explanation:
+
+Initialization
+1. Assume the grid is 8x8. Initialize all grid levels by setting their values to P.
+2. Set grids[0][0] to the first seed, generated using white noise. Let's say that seed is 9.
+
+Per ray
+1. From the highest level that still has one, pick a random seed valued cell to replace.
+   This is known by initing every level with an array containing all cell indices, and swap-removing ones that are either used or are marked C.
+2. grids[0][0] has the value 9. Keep recursing into it and find a new seed index.
+   If 9 is found, pick 9 - 1 (- since 9 is odd: if the first seed was 8, 8 + 1 would be used). Let's say the new seed is 63.
+3. Floodfill level highest_level_having_seed_cell (so level 0) starting from cell grids[highest_level_having_seed_cell][seed_valued_cell_index] (so cell grids[0][0]).
+   TODO: What four corners exactly? The direct children? For every child? On the pixel grid level?
+   TODO: When a P is encountered, use a while-loop to find the highest parent marked non-P, and recursively update its four children. 
+         Note that it's probably desirable for the floodfill to know whether the P cell was updated or not, to stop floodfilling that direction.
+   TODO: What should be done when a C is encountered?
+   The reason floodfilling is necessary and we can't just look at the four corners starting from the root every time,
+   is because it'd result in none of the root's four corners being closer to the new seed at some point, stopping the recursion immediately.
+4. For each cell's four corners, track with booleans whether the corner is closer to the new seed:
+  a. If all four corners are closer to the new seed, mark the cell with the new seed, and don't recurse.
+  b. If all four corners are further away from the new seed, don't recurse.
+  c. If one/two/three of the corners are closer to the new seed, mark this cell C and the four cell children with the old seed. Recurse for every child to step 4.
+*/

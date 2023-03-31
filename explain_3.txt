@@ -1,0 +1,46 @@
+/*
+Explanation:
+
+- After initialization, cells are never marked P.
+- Cells marked P can get remarked to either C, or a seed value.
+- Cells marked C never get remarked to P, nor to a seed value.
+- Seed valued cells can only ever get remarked to C.
+
+In other words, where # stands for a seed value:
+Possible:
+P -> C/#
+# -> C
+Impossible:
+C /> P/#
+
+
+- When wanting to know whether a seed valued cell should have the new seed put somewhere in it,
+  you can just check whether one/two/three of the four pixel corners of the seed valued cell are closer to the new seed.
+  This is true due to the fact that voronoi cells are always convex. This idea is the foundation of this entire algorithm.
+
+If so, then the seed valued cell should be marked C and the four pixel corner check should be done recursively.
+
+When all four corners are closer to the new seed, mark the cell with the new seed.
+
+- A cell marked C can't be checked using the four pixel corners trick: if the C cell has a seed on the far left and right side,
+  and the new seed belongs in the center of the C cell, then the four pixel corners of C still won't point to the new seed,
+  but the new seed should still be placed in the center.
+
+This is why whenever a C marked cell is encountered, it has to be recursively entered.
+
+- A cell marked P points to its parent/its parent's parent/etc., so to know whether a cell marked P should be changed to a C or the new seed,
+  the old seed has to be gotten by walking up the parent chain until a seed valued cell is encountered.
+
+If at least one of the four pixel corners of the original P marked cell are closer to the new seed,
+go back up to the upper parent, mark it C, and recursively update everything inside it.
+
+- It's technically possible to just place the new seed by starting from the root every time and going down any encountered C,
+  but because almost every cell will be a C once most seeds have been placed, this means that every pixel will be entered and  checked, which is gruesomely   slow.
+
+Instead, to limit how many cells are checked, it's just as correct to floodfill starting from the highest seed valued cell.
+
+This is significantly more efficient, since only a one cell wide perimeter around the actually updated cells will have to be recursively entered to the pixel level.
+This is based on the idea that when a C marked cell is recursively entered,
+a boolean can be used to indicate whether any of its inner children's cells were updated to the new seed.
+If not, then stop floodfilling in this direction.
+*/
